@@ -11,11 +11,12 @@ function Identity.pure(value)
     return setmetatable({ value = value }, Identity)
 end
 
----@generic T
----@param self mona.Identity<mona.Identity<T>>
----@return mona.Identity<T>
-function Identity:join()
-    return self.value
+---@generic T, U
+---@param self mona.Identity<T>
+---@param fn fun(value: T): mona.Identity<U>
+---@return mona.Identity<U>
+function Identity:bind(fn)
+    return fn(self.value)
 end
 
 ---@generic T

@@ -35,13 +35,14 @@ end
 Option.pure = Option.some
 
 ---@generic T, U
----@param self mona.Option<mona.Option<T>>
+---@param self mona.Option<T>
+---@param fn fun(value: T): mona.Option<U>
 ---@return mona.Option<U>
-function Option:join()
-    if self.value:is_some() then
-        return self.value
+function Option:bind(fn)
+    if self:is_some() then
+        return fn(self.value)
     else
-        return Option.none()
+        return self
     end
 end
 

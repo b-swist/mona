@@ -57,14 +57,15 @@ function Either:get_left()
     end
 end
 
----@generic E, T
----@param self mona.Either<E, mona.Either<E, T>>
----@return mona.Either<E, T>
-function Either:join()
+---@generic T, U
+---@param self mona.Either<T>
+---@param fn fun(value: T): mona.Either<U>
+---@return mona.Either<U>
+function Either:bind(fn)
     if self:is_right() then
-        return self:get_right()
+        return fn(self:get_right())
     else
-        return Either.left(self:get_left())
+        return self
     end
 end
 

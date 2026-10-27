@@ -5,16 +5,20 @@ local Monad = Applicative:extend()
 
 ---@generic T
 ---@param self mona.Monad<mona.Monad<T>>
+---@return mona.Monad<T>
 function Monad:join()
-    error("Monad.join must be implemented by a Monad instance", 2)
+    return self:bind(function(value)
+        return value
+    end)
 end
 
 ---@generic T, U
 ---@param self mona.Monad<T>
 ---@param fn fun(value: T): mona.Monad<U>
 ---@return mona.Monad<U>
+---@diagnostic disable-next-line: unused-local
 function Monad:bind(fn)
-    return self:map(fn):join()
+    error("Monad.join must be implemented by a Monad instance", 2)
 end
 
 ---@generic T, U
