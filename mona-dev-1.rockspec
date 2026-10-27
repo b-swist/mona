@@ -20,6 +20,6 @@ build = {
         ["mona.identity"] = "src/identity.lua",
         ["mona.option"] = "src/option.lua",
         ["mona.either"] = "src/either.lua",
-        -- ["mona.list"] = "src/list.lua",
+        ["mona.list"] = "src/list.lua",
     },
 }
